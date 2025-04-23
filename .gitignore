@@ -59,3 +59,12 @@ build/
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
+.DS_Store
+build/
+.idea/
+*.iml
+*.apk
+*.aab
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
