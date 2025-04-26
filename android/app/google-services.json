@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "942064825307",
+    "project_id": "twitch-clone-1773e",
+    "storage_bucket": "twitch-clone-1773e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942064825307:android:f51b5b605c12ff77c76dfe",
+        "android_client_info": {
+          "package_name": "com.example.twitch_clone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTbZIYHWrOdWCFbuYGcIZcMjeffZEq4JY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
