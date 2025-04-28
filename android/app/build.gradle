@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.example.twitch_clone"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 35
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

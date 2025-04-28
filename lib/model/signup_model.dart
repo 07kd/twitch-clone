@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-class User {
+class SignupModel {
   final String uid;
   final String username;
   final String email;
 
-  User({
+  SignupModel({
     required this.uid,
     required this.username,
     required this.email,
@@ -19,8 +19,8 @@ class User {
     };
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
+  factory SignupModel.fromMap(Map<String, dynamic> map) {
+    return SignupModel(
       uid: map['uid'] ?? '',
       username: map['username'] ?? '',
       email: map['email'] ?? '',
