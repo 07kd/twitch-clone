@@ -34,4 +34,13 @@ class SignupCubit extends Cubit<SignupState> {
       emit(SignupError(error: e.toString()));
     }
   }
+
+  Future<Map<String, dynamic>?> getCurrentUser({required String userid}) async {
+    if (userid != null) {
+      final snap =
+          await _firebaseFirestore.collection("users").doc(userid).get();
+      return snap.data();
+    }
+    return {};
+  }
 }

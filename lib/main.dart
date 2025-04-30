@@ -3,8 +3,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:twitch_clone/bloc/firebase/firebase_methods.dart';
 import 'package:twitch_clone/bloc/login/login_cubit.dart';
 import 'package:twitch_clone/bloc/signup/signup_cubit.dart';
+import 'package:twitch_clone/bloc/start_livestream/start_livestream_cubit.dart';
 import 'package:twitch_clone/screens/home_screen.dart';
 import 'package:twitch_clone/screens/login_screen.dart';
 import 'package:twitch_clone/screens/onboarding_screen.dart';
@@ -24,7 +26,12 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider<LoginCubit>(create: (_) => LoginCubit()),
-        BlocProvider<SignupCubit>(create: (_) => SignupCubit())
+        BlocProvider<SignupCubit>(create: (_) => SignupCubit()),
+        BlocProvider<FirebaseMethodsCubit>(
+            create: (_) => FirebaseMethodsCubit()),
+        BlocProvider<StartLivestreamCubit>(
+          create: (_) => StartLivestreamCubit(),
+        ),
       ],
       child: const MyApp(),
     ),
