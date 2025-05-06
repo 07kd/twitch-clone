@@ -2,9 +2,13 @@ import 'dart:typed_data';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:twitch_clone/bloc/start_livestream/start_livestream_cubit.dart';
+import 'package:twitch_clone/screens/BroadcastScreen.dart';
 import 'package:twitch_clone/utils/colors.dart';
 import 'package:twitch_clone/utils/utils.dart';
 import 'package:twitch_clone/widgets/custom_button.dart';
+import 'package:twitch_clone/widgets/custom_snackbar.dart';
 import 'package:twitch_clone/widgets/custom_textfield.dart';
 
 class GoLiveScreen extends StatefulWidget {
@@ -103,13 +107,48 @@ class _GoLiveScreenState extends State<GoLiveScreen> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 10,
-                ),
-                child: CustomButton(
-                  text: 'Go Live!',
-                  onTap: () {},
+              BlocListener<StartLivestreamCubit, StartLivestreamState>(
+                listener: (context, state) {
+                  if (state is StartLivestreamLoading) {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) => const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                  if (state is StartLivestreamSuccess) {
+                    Navigator.of(context, rootNavigator: true).pop();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BroadcastScreen(
+                            channelId: state.channelID,
+                            isBroadCaster: true,
+                          ),
+                        ));
+                  }
+                  if (state is StartLivestreamFailed) {
+                    Navigator.of(context, rootNavigator: true).pop();
+                    showSnackBar(context, state.error);
+                  }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 10,
+                  ),
+                  child: CustomButton(
+                    text: 'Go Live!',
+                    onTap: () {
+                      context
+                          .read<StartLivestreamCubit>()
+                          .startlivestreamMethod(
+                              context: context,
+                              title: _titleController.text,
+                              image: image);
+                    },
+                  ),
                 ),
               )
             ],

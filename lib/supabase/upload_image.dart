@@ -10,7 +10,7 @@ Future<String> uploadToSupabaseStorage(Uint8List image) async {
 
     // Upload the image bytes
     await Supabase.instance.client.storage
-        .from('twitchProfilePhotos')
+        .from('twitchprofilephotos')
         .uploadBinary(filePath, image,
             fileOptions: const FileOptions(
               contentType: 'image/jpeg',
@@ -18,7 +18,7 @@ Future<String> uploadToSupabaseStorage(Uint8List image) async {
 
     // Get the public URL
     final String downloadUrl = Supabase.instance.client.storage
-        .from('twitchProfilePhotos')
+        .from('twitchprofilephotos')
         .getPublicUrl(filePath);
 
     return downloadUrl;

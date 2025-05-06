@@ -31,26 +31,36 @@ class StartLivestreamCubit extends Cubit<StartLivestreamState> {
         emit(StartLivestreamFailed('User data not found'));
         return;
       }
-      String channelID = "${user.uid}${user.username}";
 
-      if (title.isNotEmpty && image != null) {
-        String downloadUrl = await uploadToSupabaseStorage(image);
-        LiveStream liveStream = LiveStream(
-            title: title,
-            image: downloadUrl,
-            uid: user.uid,
-            username: user.username,
-            viewers: 0,
-            channelId: channelID,
-            startedAt: DateTime.now());
+      if (!((await _firestore
+              .collection("livestream")
+              .doc("${user.uid}${user.username}")
+              .get())
+          .exists)) {
+        String channelID = "${user.uid}${user.username}";
 
-        await _firestore
-            .collection("livestream")
-            .doc(channelID)
-            .set(liveStream.toMap());
-        emit(StartLivestreamSuccess());
+        if (title.isNotEmpty && image != null) {
+          String downloadUrl = await uploadToSupabaseStorage(image);
+          LiveStream liveStream = LiveStream(
+              title: title,
+              image: downloadUrl,
+              uid: user.uid,
+              username: user.username,
+              viewers: 0,
+              channelId: channelID,
+              startedAt: DateTime.now());
+
+          await _firestore
+              .collection("livestream")
+              .doc(channelID)
+              .set(liveStream.toMap());
+          emit(StartLivestreamSuccess(channelID: channelID));
+        } else {
+          emit(StartLivestreamFailed("Please enter all the fields"));
+        }
       } else {
-        emit(StartLivestreamFailed("Please enter all the fields"));
+        emit(StartLivestreamFailed(
+            "Two live stream cannot be start at the same time"));
       }
     } catch (e) {
       emit(StartLivestreamFailed(e.toString()));

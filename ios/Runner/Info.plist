@@ -45,7 +45,13 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
-		<key>NSPhotoLibraryUsageDescription</key>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo for Thumbnail</string>
+	
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to your camera to allow live streaming.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to your microphone to capture your voice during live streaming.</string>
+
 </dict>
 </plist>
