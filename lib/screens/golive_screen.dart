@@ -125,7 +125,7 @@ class _GoLiveScreenState extends State<GoLiveScreen> {
                         MaterialPageRoute(
                           builder: (context) => BroadcastScreen(
                             channelId: state.channelID,
-                            isBroadCaster: true,
+                            isBroadcaster: true,
                           ),
                         ));
                   }
